@@ -1,29 +1,31 @@
-name: generate pacman contribution graph
+name: GitHub-Profile-3D-Contrib
 
 on:
-  schedule:
-    - cron: "0 0 * * *"   # runs automatically every 24 hours
-  workflow_dispatch:        # lets you run it manually from the Actions tab
+  schedule: # runs once a day
+    - cron: "0 18 * * *"
+  workflow_dispatch: # lets you run it manually from the Actions tab
   push:
     branches:
       - main
 
-jobs:
-  generate:
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - name: generate pacman-contribution-graph.svg
-        uses: abozanona/pacman-contribution-graph@main
-        with:
-          github_user_name: ${{ github.repository_owner }}
+permissions:
+  contents: write
 
-      - name: push SVG to the output branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
-        with:
-          target_branch: output
-          build_dir: dist
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: generate-github-profile-3d-contrib
+    steps:
+      - uses: actions/checkout@v5
+      - uses: yoshi389111/github-profile-3d-contrib@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+      - name: Commit & Push
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add -A .
+          if git commit -m "generated"; then
+            git push
+          fi
