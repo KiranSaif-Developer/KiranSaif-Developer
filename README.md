@@ -181,7 +181,6 @@ A UK-based airport transfer booking site — live client project.
 <div align="center">
 <img src="https://github-profile-trophy.vercel.app/?username=KiranSaif-Developer&theme=discord&no-frame=true&column=4&margin-w=10&margin-h=10" />
 </div>
-
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:FFD60A,50:1282A2,100:001F54&height=4&section=header" width="100%"/>
 
 <h1>Contribution Activity</h1>
